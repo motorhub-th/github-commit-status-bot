@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.1155.0",
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "parse-url-query-params": "^0.0.6"
   }
 }
