@@ -76,7 +76,7 @@ exports.getPipelineExecution = async (pipelineName, executionId) => {
 
 	const result = await codepipeline.getPipelineExecution(params).promise();
 	console.log(params);
-	console.log(result);
+	console.log(result.pipelineExecution.artifactRevisions);
 	const artifactRevision = result.pipelineExecution.artifactRevisions[0];
 
 	const revisionURL = artifactRevision.revisionUrl;
