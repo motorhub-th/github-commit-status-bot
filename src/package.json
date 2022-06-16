@@ -7,14 +7,14 @@
     "lint": "./node_modules/.bin/eslint **/*.js"
   },
   "devDependencies": {
-    "aws-sdk": "^2.267.1",
-    "eslint": "^7.5.0",
-    "mocha": "^8.2.1",
-    "sinon": "^7.4.1",
-    "chai": "^4.2.0",
-    "lodash": ">=4.17.19"
+    "chai": "^4.3.6",
+    "eslint": "^7.32.0",
+    "lodash": "^4.17.21",
+    "mocha": "^10.0.0",
+    "sinon": "^7.5.0"
   },
   "dependencies": {
+    "aws-sdk": "^2.1155.0",
     "axios": "^0.21.1"
   }
 }
