@@ -10,6 +10,7 @@ const codepipeline = new aws.CodePipeline();
 const Password = process.env.ACCESS_TOKEN;
 
 exports.handler = async (event) => {
+	console.log(event.detail);
 	const region = event.region;
 	const pipelineName = event.detail.pipeline;
 	const executionId = event.detail['execution-id'];
@@ -74,6 +75,8 @@ exports.getPipelineExecution = async (pipelineName, executionId) => {
 	};
 
 	const result = await codepipeline.getPipelineExecution(params).promise();
+	console, log(params);
+	console.log(result);
 	const artifactRevision = result.pipelineExecution.artifactRevisions[0];
 
 	const revisionURL = artifactRevision.revisionUrl;
