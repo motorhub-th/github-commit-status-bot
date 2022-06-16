@@ -2,6 +2,7 @@
 
 const aws = require('aws-sdk');
 const axios = require('axios');
+const parseQueryParameters = require('parse-url-query-params').default;
 
 const BaseURL = 'https://api.github.com/repos';
 
@@ -10,7 +11,6 @@ const codepipeline = new aws.CodePipeline();
 const Password = process.env.ACCESS_TOKEN;
 
 exports.handler = async (event) => {
-	console.log(event.detail);
 	const region = event.region;
 	const pipelineName = event.detail.pipeline;
 	const executionId = event.detail['execution-id'];
@@ -75,19 +75,17 @@ exports.getPipelineExecution = async (pipelineName, executionId) => {
 	};
 
 	const result = await codepipeline.getPipelineExecution(params).promise();
-	console.log(params);
-	console.log(result.pipelineExecution.artifactRevisions);
 	const artifactRevision = result.pipelineExecution.artifactRevisions[0];
 
 	const revisionURL = artifactRevision.revisionUrl;
 	const sha = artifactRevision.revisionId;
 
-	const pattern = /github.com\/(.+)\/(.+)\/commit\//;
-	const matches = pattern.exec(revisionURL);
+	const { FullRepositoryId } = parseQueryParameters(revisionURL);
+	const matches = FullRepositoryId.split('/');
 
 	return {
-		owner: matches[1],
-		repository: matches[2],
+		owner: matches[0],
+		repository: matches[1],
 		sha: sha
 	};
 };
